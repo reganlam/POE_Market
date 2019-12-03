@@ -1,5 +1,5 @@
 {
-	"name": "Circle of Fear",
+	"name": "Paradoxica",
 	"price": 5,
 	"currency": "exa",
 	"filter": {
@@ -7,17 +7,27 @@
 			"status":{
 				"option": "online"
 			},
-			"name": "Circle of Fear",
-			"type": "Sapphire Ring",
+			"name": "Paradoxica",
+			"type": "Vaal Rapier",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_1862926389"
+						"id": "crafted.stat_1509134228",
+						"value": {
+							"min": 95
+						}
 					},
 					{
-						"id": "explicit.stat_1970606344"
+						"id": "crafted.stat_210067635"
+					},
+					{
+						"id": "crafted.stat_725880290"
+					},
+					{
+						"id": "crafted.stat_2016708976"
 					}
+
 				]
 			}],
 			"filters":{

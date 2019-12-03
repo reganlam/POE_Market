@@ -8,9 +8,6 @@ const glob = require('glob')
 const connectDB = require('./config/db')
 const Listing = require('./models/Listing')
 
-const item1 = require('./filters/xoph_blood')
-const item2 = require('./filters/circle_of_fear')
-
 const query_limiter = new Bottleneck({
 	maxConcurrent: 2,
 	minTime: 550
@@ -45,7 +42,7 @@ const check_listings = async(item) => {
 
 	const {price, currency} = item
 
-	console.log('Searching:', item.name + ` (${listings.length} Listings)`)
+	console.log(item.name, `(${listings.length} Listings)`)
 
 	// Looping from lowest to highest priced listings
 	for(let i = 0; i < listings.length; i++){
@@ -70,9 +67,22 @@ const check_listings = async(item) => {
 
 			// compare prices
 			if(currency == listing_data.currency && price < listing_data.price){
-				console.log('Breaking:', listing_data.name)
+				// console.log('			Breaking:', listing_data.name)
 				break
 			} 
+
+			// TODO: make currency comparison
+			// Case: Where currency is chaos and only listings are in exalts
+			else if(currency == 'chaos' && listing_data.currency == 'exa'){
+				// console.log('			Breaking:', listing_data.name)
+				break
+			}
+
+			Listing.findOne({listing_id: listing_data.id}, (err, query) => {
+				if(!query){
+					console.log(`!!!!!!!!!!!!!!!!!!!!!!!FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency} !!!!!!!!!!!!!!!!!!!!!`)
+				}
+			})
 
 			// Check for dup / save into DB
 			let listing = await Listing.findOneAndUpdate(
@@ -87,31 +97,40 @@ const check_listings = async(item) => {
 				{new: true, upsert: true}
 			)
 
-			console.log(`FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency}`)
-
 		} catch(err){
 			console.error('Error:', err)
 		}
 	}
 }
 
-const snipe = async() => {
+const snipe = async(item) => {
+	results_limiter.schedule(() => check_listings(item))
+}
 
-	results_limiter.schedule(() => check_listings(item1))
-	results_limiter.schedule(() => check_listings(item2))
-	// results_limiter.schedule(() => check_listings(listings, id, item))
-	// results_limiter.schedule(() => check_listings(listings, id, item))
+const populateTasks = () => {
+
+	const tasksArr = []
+
+	const files = glob.sync('./filters/*.json')
+
+	for(let i = 0; i< files.length; i++){
+		let data = require(files[i])
+    	tasksArr.push(data)
+	}
+
+	return tasksArr
+}
+
+const main = () => {
+	const tasksArr = populateTasks()
+
+	for(let i = 0; i < tasksArr.length; i++){
+		snipe(tasksArr[i])
+	}
 }
 
 connectDB()
 const db = mongoose.connection
 db.once('open', () => {
-
-	glob('./filters/*.json', (err, files) => {
-	    if (err) {
-	        console.log(err);
-	    } else {
-	        console.log(files);
-	    }
-	});
+	main()
 })

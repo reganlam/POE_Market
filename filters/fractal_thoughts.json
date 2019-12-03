@@ -1,18 +1,24 @@
-const query = {
+{
+	"name": "Fractal Thoughts",
+	"price": 50,
+	"currency": "chaos",
+	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Xoph's Blood",
-			"type": "Amber Amulet",
+			"name": "Fractal Thoughts",
+			"type": "Vaal Mask",
 			"stats":[{
 				"type": "and",
-				"filters":[{
-					"id": "pseudo.pseudo_total_fire_resistance",
-					"value": {
-						"min": 40
+				"filters":[
+					{
+						"id": "explicit.stat_2328588114",
+						"value": {
+							"min": 40
+						}
 					}
-				}]
+				]
 			}],
 			"filters":{
 				"misc_filters":{
@@ -20,7 +26,7 @@ const query = {
 					"filters":{
 						"corrupted": {
 							"option": "false"
-						},
+						}
 					}
 				},
 				"trade_filters":{
@@ -28,23 +34,13 @@ const query = {
 					 "filters":{
 					 	"sale_type":{
 					 		"option": "priced"
-					 	},
+					 	}
 					 }
 				}
 			}
 		},
 		"sort":{
 			"price":"asc"
+		}
 	}
-}
-
-const data = {
-	name: "Xoph's Blood",
-	filter: query,
-	price: 2,
-	currency: 'exa'
-}
-
-module.exports = {
-	data
 }

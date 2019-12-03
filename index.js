@@ -42,7 +42,7 @@ const check_listings = async(item) => {
 
 	const {price, currency} = item
 
-	console.log(item.name, `(${listings.length} Listings)`)
+	// console.log(item.name, `(${listings.length} Listings)`)
 
 	// Looping from lowest to highest priced listings
 	for(let i = 0; i < listings.length; i++){
@@ -108,7 +108,6 @@ const snipe = async(item) => {
 }
 
 const populateTasks = () => {
-
 	const tasksArr = []
 
 	const files = glob.sync('./filters/*.json')
@@ -123,10 +122,11 @@ const populateTasks = () => {
 
 const timeout = (tasksArr) => {
 	setTimeout( () => {
-		console.log('')
+		// console.log('Checking...')
 		for(let i = 0; i < tasksArr.length; i++){
 			snipe(tasksArr[i])
 		}
+		// console.log('Checking done...')
 		timeout(tasksArr)
 	}, 60000)
 }

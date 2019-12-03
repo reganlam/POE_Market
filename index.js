@@ -121,12 +121,24 @@ const populateTasks = () => {
 	return tasksArr
 }
 
+const timeout = (tasksArr) => {
+	setTimeout( () => {
+		console.log('')
+		for(let i = 0; i < tasksArr.length; i++){
+			snipe(tasksArr[i])
+		}
+		timeout(tasksArr)
+	}, 60000)
+}
+
 const main = () => {
 	const tasksArr = populateTasks()
 
 	for(let i = 0; i < tasksArr.length; i++){
-		snipe(tasksArr[i])
+			snipe(tasksArr[i])
 	}
+
+	timeout(tasksArr)
 }
 
 connectDB()

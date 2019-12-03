@@ -13,6 +13,7 @@
   "dependencies": {
     "bottleneck": "^2.19.5",
     "config": "^3.2.4",
+    "glob": "^7.1.6",
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.13",
     "node-fetch": "^2.6.0"

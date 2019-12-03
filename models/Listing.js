@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// listing_id, name, type, whisper, price, currency, date
+// id, name, type, whisper, price, currency, date
 const ListingSchema = new mongoose.Schema({
 	listing_id: {
 		type: String,

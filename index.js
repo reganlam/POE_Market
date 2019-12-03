@@ -2,11 +2,14 @@
 const Bottleneck = require("bottleneck/es5")
 const fetch = require("node-fetch")
 const mongoose = require('mongoose')
+const glob = require('glob')
 
 // from file
 const connectDB = require('./config/db')
 const Listing = require('./models/Listing')
-const item = require('./xoph_blood.js')
+
+const item1 = require('./filters/xoph_blood')
+const item2 = require('./filters/circle_of_fear')
 
 const query_limiter = new Bottleneck({
 	maxConcurrent: 2,
@@ -26,7 +29,7 @@ const get_all_listings = async(item) => {
 		let res = await fetch(url, {
 			method: "POST",
 			headers:{'Content-Type': 'application/json'},
-			body: JSON.stringify(item.data.filter)
+			body: JSON.stringify(item.filter)
 		})
 
 		res = await res.json()
@@ -37,11 +40,13 @@ const get_all_listings = async(item) => {
 }
 
 // Check if listings is under threshold
-const check_listings = async(listings, id, item) => {
+const check_listings = async(item) => {
+	const {listings, id} = await get_all_listings(item)
 
-	const {price, currency} = item.data
+	const {price, currency} = item
 
-	console.log('Searching:', item.data.name + ` (${listings.length} Listings)`)
+	console.log('Searching:', item.name + ` (${listings.length} Listings)`)
+
 	// Looping from lowest to highest priced listings
 	for(let i = 0; i < listings.length; i++){
 		const url =`https://www.pathofexile.com/api/trade/fetch/${listings[i]}?query=${id}`
@@ -64,42 +69,25 @@ const check_listings = async(listings, id, item) => {
 			}
 
 			// compare prices
-			if(currency == listing_data.currency){
-				if(listing_data.price <= price){
-
-					// Check for dup / save into DB
-					let listing = await Listing.findOneAndUpdate(
-						{listing_id: listing_data.id}, 
-						{
-							name: listing_data.name, 
-							type: listing_data.type, 
-							whisper: listing_data.whisper,
-							price: listing_data.price,
-							currency: listing_data.currency
-						},
-						{new: true, upsert: true}
-					)
-
-					console.log(`FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency}`)
-				} else {
-					console.log('Breaking:', listing_data.name)
-					break
-				}
+			if(currency == listing_data.currency && price < listing_data.price){
+				console.log('Breaking:', listing_data.name)
+				break
 			} 
-				// Check for dup / save into DB
-				let listing = await Listing.findOneAndUpdate(
-					{listing_id: listing_data.id}, 
-					{
-						name: listing_data.name, 
-						type: listing_data.type, 
-						whisper: listing_data.whisper,
-						price: listing_data.price,
-						currency: listing_data.currency
-					},
-					{new: true, upsert: true}
-				)
 
-				console.log(`FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency}`)
+			// Check for dup / save into DB
+			let listing = await Listing.findOneAndUpdate(
+				{listing_id: listing_data.id}, 
+				{
+					name: listing_data.name, 
+					type: listing_data.type, 
+					whisper: listing_data.whisper,
+					price: listing_data.price,
+					currency: listing_data.currency
+				},
+				{new: true, upsert: true}
+			)
+
+			console.log(`FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency}`)
 
 		} catch(err){
 			console.error('Error:', err)
@@ -107,11 +95,10 @@ const check_listings = async(listings, id, item) => {
 	}
 }
 
-const snipe = async(item) => {
-	const {listings, id} = await get_all_listings(item)
+const snipe = async() => {
 
-	results_limiter.schedule(() => check_listings(listings, id, item))
-	results_limiter.schedule(() => check_listings(listings, id, item))
+	results_limiter.schedule(() => check_listings(item1))
+	results_limiter.schedule(() => check_listings(item2))
 	// results_limiter.schedule(() => check_listings(listings, id, item))
 	// results_limiter.schedule(() => check_listings(listings, id, item))
 }
@@ -119,5 +106,12 @@ const snipe = async(item) => {
 connectDB()
 const db = mongoose.connection
 db.once('open', () => {
-	snipe(item)
+
+	glob('./filters/*.json', (err, files) => {
+	    if (err) {
+	        console.log(err);
+	    } else {
+	        console.log(files);
+	    }
+	});
 })

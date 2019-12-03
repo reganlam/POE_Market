@@ -1,0 +1,46 @@
+{
+	"name": "Circle of Fear",
+	"price": 4,
+	"currency": "exa",
+	"filter": {
+		"query":{
+			"status":{
+				"option": "online"
+			},
+			"name": "Circle of Fear",
+			"type": "Sapphire Ring",
+			"stats":[{
+				"type": "and",
+				"filters":[
+					{
+						"id": "explicit.stat_1862926389"
+					},
+					{
+						"id": "explicit.stat_1970606344"
+					}
+				]
+			}],
+			"filters":{
+				"misc_filters":{
+					"disabled": false,
+					"filters":{
+						"corrupted": {
+							"option": "false"
+						}
+					}
+				},
+				"trade_filters":{
+					"disabled": false,
+					 "filters":{
+					 	"sale_type":{
+					 		"option": "priced"
+					 	}
+					 }
+				}
+			}
+		},
+		"sort":{
+			"price":"asc"
+		}
+	}
+}

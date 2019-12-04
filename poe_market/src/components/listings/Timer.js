@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 const getListedDate = (date) => {
   const listing_date = new Date(Date.parse(date))
   const current_date = new Date()
 
-  if(listing_date.getDate() != current_date.getDate() || 
-    listing_date.getMonth() != current_date.getMonth() || 
-    listing_date.getYear() != current_date.getYear()){
+  if(listing_date.getDate() !== current_date.getDate() || 
+    listing_date.getMonth() !== current_date.getMonth() || 
+    listing_date.getYear() !== current_date.getYear()){
     return ('Listed days ago')
   }
 
@@ -22,10 +22,10 @@ const getListedDate = (date) => {
   else if (minutes >= 60){
     return (`Listed 1 hour ago`)
   }
-  else if (minutes == 1){
+  else if (minutes === 1){
     return ('Listed 1 minute ago')
   }
-  else if (minutes == 0){
+  else if (minutes === 0){
     return ('Listed <1 minute ago')
   }
   else{

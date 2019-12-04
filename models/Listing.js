@@ -26,6 +26,10 @@ const ListingSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	hasSeen:{
+		type: Boolean,
+		default: false
+	},
 	created_at:{
 		type: Date,
 		required: true

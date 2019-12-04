@@ -127,6 +127,7 @@ const populateTasks = () => {
 }
 
 const timeout = (tasksArr) => {
+	console.log('sniping...')
 	setTimeout( () => {
 		for(let i = 0; i < tasksArr.length; i++){
 			snipe(tasksArr[i])

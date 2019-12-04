@@ -4,7 +4,8 @@ import {
 } from './types'
 
 // Get all listings
-export const getPosts = () => async dispatch => {
+export const getListings = () => async dispatch => {
+	console.log('getListings: dispatching...')
 	try {
 		const res = await axios.get('/api/listings')
 

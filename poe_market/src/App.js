@@ -7,18 +7,14 @@ import {Provider} from 'react-redux'
 import store from './store'
 
 // from file
-import Listing from './components/listing/Listing'
+import Listing from './components/listings/Listings'
 
 const App = () => (
   <Provider store = {store}>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <Fragment>
-          <Listing />
-        </Fragment>
-      </header>
+    <div className="App-header">
+      <Fragment>
+        <Listing />
+      </Fragment>
     </div>
   </Provider>
 )

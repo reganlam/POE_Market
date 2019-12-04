@@ -4,9 +4,15 @@ const fetch = require("node-fetch")
 const mongoose = require('mongoose')
 const glob = require('glob')
 
+// socket
+const io = require('socket.io-client');
+const socket = io('http://localhost:8000');
+
 // from file
 const connectDB = require('./config/db')
 const Listing = require('./models/Listing')
+
+const G_TIMEOUT = 60000
 
 const query_limiter = new Bottleneck({
 	maxConcurrent: 2,
@@ -62,7 +68,7 @@ const check_listings = async(item) => {
 				type: res.item.typeLine,
 				whisper: res.listing.whisper,
 				price: res.listing.price.amount,
-				currency: res.listing.price.currency
+				currency: res.listing.price.currency,
 			}
 
 			// compare prices
@@ -70,19 +76,16 @@ const check_listings = async(item) => {
 				// console.log('			Breaking:', listing_data.name)
 				break
 			} 
-
-			// TODO: make currency comparison
-			// Case: Where currency is chaos and only listings are in exalts
 			else if(currency == 'chaos' && listing_data.currency == 'exa'){
 				// console.log('			Breaking:', listing_data.name)
 				break
 			}
 
-			Listing.findOne({listing_id: listing_data.id}, (err, query) => {
-				if(!query){
-					console.log(`!!!!!!!!!!!!!!!!!!!!!!!FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency} !!!!!!!!!!!!!!!!!!!!!`)
-				}
-			})
+			const dupe = await Listing.exists({listing_id: listing_data.id})
+
+			if(dupe) { continue }
+
+			console.log(`!!!!!!!!!!!!!!!!!!!!!!!FOUND: ${listing_data.name}: ${listing_data.price} ${listing_data.currency} !!!!!!!!!!!!!!!!!!!!!`)
 
 			// Check for dup / save into DB
 			let listing = await Listing.findOneAndUpdate(
@@ -92,10 +95,13 @@ const check_listings = async(item) => {
 					type: listing_data.type, 
 					whisper: listing_data.whisper,
 					price: listing_data.price,
-					currency: listing_data.currency
+					currency: listing_data.currency,
+					created_at: Date.now()
 				},
 				{new: true, upsert: true}
 			)
+
+			socket.emit('INSERTED_LISTING')
 
 		} catch(err){
 			console.error('Error:', err)
@@ -122,13 +128,11 @@ const populateTasks = () => {
 
 const timeout = (tasksArr) => {
 	setTimeout( () => {
-		// console.log('Checking...')
 		for(let i = 0; i < tasksArr.length; i++){
 			snipe(tasksArr[i])
 		}
-		// console.log('Checking done...')
 		timeout(tasksArr)
-	}, 60000)
+	}, G_TIMEOUT)
 }
 
 const main = () => {
@@ -146,3 +150,5 @@ const db = mongoose.connection
 db.once('open', () => {
 	main()
 })
+
+module.exports = main

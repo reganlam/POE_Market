@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 // Redux
@@ -8,6 +7,10 @@ import store from './store'
 
 // from file
 import Listing from './components/listings/Listings'
+
+// setup socket connection
+import configureSocket from './socket';
+export const socket = configureSocket(store.dispatch);
 
 const App = () => (
   <Provider store = {store}>

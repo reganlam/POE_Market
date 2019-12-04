@@ -10,13 +10,14 @@ const Listings = ({getListings, listing: {listings, loading}}) => {
 		getListings()
 	}, [getListings])
 
+
 	return (
 		<Fragment>
 			<div class ='container text-left listings'>
 				{listings.map(listing => (
-					<div class = 'row listing'>
+					<div key={listing._id} class='row listing'>
 						<h6 class = 'col-2'>
-							{listing.date}
+							{listing.created_at}
 						</h6>
 						<h6 class = 'col-2'>
 							{listing.name}
@@ -29,6 +30,7 @@ const Listings = ({getListings, listing: {listings, loading}}) => {
 						<h6 class = 'col-6'>
 							{listing.whisper}
 						</h6>
+						{'\n'}
 					</div>
 				))}
 			</div>

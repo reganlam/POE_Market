@@ -9,7 +9,7 @@ const connectDB = async() => {
 			useNewUrlParser: true,
 			useFindAndModify: false
 		})
-		console.log('Database: MongoDB connected...')
+		console.log('MongoDB connected...')
 	} catch(err){
 		console.error('Error:', err)
 	}

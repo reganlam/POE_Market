@@ -17,7 +17,8 @@ export default function(state=initialState, action) {
 		case GET_LISTINGS:
 			return {
 				...state,
-				listings: payload.filter(listing => listing.hasSeen == false).reverse(),
+				listings: payload.filter(listing => listing.hasSeen === false).reverse(),
+				// listings: payload.reverse(),
 				loading: false
 			}
 		case MAKE_LISTING_SEEN:

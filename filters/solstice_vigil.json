@@ -1,27 +1,27 @@
 {
-	"name": "Daresso's Defiance",
-	"price": 20,
-	"currency": "chaos",
+	"name": "Solstice Vigil",
+	"price": 2,
+	"currency": "exa",
 	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Daresso's Defiance",
-			"type": "Full Dragonscale",
+			"name": "Solstice Vigil",
+			"type": "Onyx Amulet",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_3151397056",
+						"id": "explicit.stat_2154246560",
 						"value": {
-							"min": 95
+							"min": 25
 						}
 					},
 					{
 						"id": "explicit.stat_3299347043",
 						"value": {
-							"min": 80
+							"min": 70
 						}
 					}
 				]

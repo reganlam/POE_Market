@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server.js",
-    "sniper": "concurrently \"node server.js\" \"node snipe.js\""
+    "client": "cd poe_market && npm start",
+    "server": "concurrently \"node server.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

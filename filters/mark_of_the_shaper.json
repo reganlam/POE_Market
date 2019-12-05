@@ -1,7 +1,7 @@
 {
 	"name": "Mark of the Shaper",
-	"price": 100,
-	"currency": "chaos",
+	"price": 1,
+	"currency": "exa",
 	"filter": {
 		"query":{
 			"status":{

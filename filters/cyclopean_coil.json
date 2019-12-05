@@ -1,21 +1,21 @@
 {
-	"name": "Mark of the Elder (Filter 001)",
-	"price": 40,
+	"name": "Cyclopean Coil",
+	"price": 20,
 	"currency": "chaos",
 	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Mark of the Elder",
-			"type": "Steel Ring",
+			"name": "Cyclopean Coil",
+			"type": "Leather Belt",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_1555962658",
+						"id": "explicit.stat_3143208761",
 						"value": {
-							"min": 80
+							"min": 15
 						}
 					}
 				]

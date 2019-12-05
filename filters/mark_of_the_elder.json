@@ -1,7 +1,7 @@
 {
-	"name": "Mark of the Elder (Filter 002)",
-	"price": 40,
-	"currency": "chaos",
+	"name": "Mark of the Elder",
+	"price": 1,
+	"currency": "exa",
 	"filter": {
 		"query":{
 			"status":{
@@ -15,13 +15,13 @@
 					{
 						"id": "explicit.stat_1555962658",
 						"value": {
-							"min": 70
+							"min": 80
 						}
 					},
 					{
-						"id": "explicit.stat_4067062424",
+						"id": "explicit.stat_983749596",
 						"value":{
-							"min": 40
+							"min": 10
 						}
 					}
 				]

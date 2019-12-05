@@ -1,4 +1,8 @@
-import {GET_LISTINGS} from '../actions/types'
+import {
+	GET_LISTINGS, 
+	LISTING_ERROR,
+	MAKE_LISTING_SEEN
+} from '../actions/types'
 
 const initialState = {
 	listings: [],
@@ -13,9 +17,11 @@ export default function(state=initialState, action) {
 		case GET_LISTINGS:
 			return {
 				...state,
-				listings: payload.reverse(),
+				listings: payload.filter(listing => listing.hasSeen == false).reverse(),
 				loading: false
 			}
+		case MAKE_LISTING_SEEN:
+		case LISTING_ERROR:
 		default:
 			return state
 	}

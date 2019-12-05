@@ -1,1 +1,3 @@
 export const GET_LISTINGS = 'GET_LISTINGS'
+export const MAKE_LISTING_SEEN = 'MAKE_LISTING_SEEN'
+export const LISTING_ERROR = 'LISTING_ERROR'

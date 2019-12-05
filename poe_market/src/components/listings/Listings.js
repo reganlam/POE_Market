@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 // from file
-import {getListings} from '../../actions/listing'
+import {getListings, makeListingSeen} from '../../actions/listing'
 import Timer from './Timer'
 
-const Listings = ({getListings, listing: {listings, loading}}) => {
+const Listings = ({getListings, makeListingSeen, listing: {listings, loading}}) => {
 	useEffect(() => {
 		getListings()
 	}, [getListings])
@@ -25,15 +25,15 @@ const Listings = ({getListings, listing: {listings, loading}}) => {
 							</div>
 							<div key={listing._id} className='row listing'>
 								<h6 className = 'col-2'>
-									{listing.name}
+									<button type="button" onClick={ () => {
+										window.confirm('Are you sure you wish to hide this listing?') && makeListingSeen(listing._id)
+									}} className="btn btn-dark">{listing.name}</button>
 								</h6>
-								<h6 className = 'col-2 price'>
-									{listing.price} 
-									{' '}
-									{listing.currency}
+								<h6 className = 'col-2'>
+									<div className="btn btn-dark">{listing.price}{' '}{listing.currency}</div>
 								</h6>
 								<h6 className = 'col-8'>
-									{listing.whisper}
+									<button type="button" className="btn btn-dark">{listing.whisper}</button>
 								</h6>
 							</div>
 						</Fragment>
@@ -47,6 +47,7 @@ const Listings = ({getListings, listing: {listings, loading}}) => {
 
 Listings.propTypes = {
 	getListings: PropTypes.func.isRequired,
+	makeListingSeen: PropTypes.func.isRequired,
 	listing: PropTypes.object.isRequired
 }
 
@@ -54,4 +55,4 @@ const mapStateToProps = state => ({
 	listing: state.listing
 })
 
-export default connect(mapStateToProps, {getListings})(Listings)
+export default connect(mapStateToProps, {getListings, makeListingSeen})(Listings)

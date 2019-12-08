@@ -10,4 +10,5 @@ Fetch Path of Exile trade API to filter for good deals
 * Items appear on the listings as soon as they are found
 * Clicking on the item's name can hide the listing
 * Clicking on the whisper's box will redirect you to the POE's trade listings
+<br/><br/>
 ![Listings of items indexed](https://i.imgur.com/yuZ9zEa.png)

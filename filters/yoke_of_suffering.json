@@ -1,28 +1,22 @@
 {
-	"name": "Solstice Vigil",
-	"price": 2,
-	"currency": "exa",
-	"link": "https://www.pathofexile.com/trade/search/Standard",
+	"name": "Yoke of Suffering",
+	"price": 100,
+	"currency": "chaos",
+	"link": "https://www.pathofexile.com/trade/search/Standard/6zGjWo9UG",
 	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Solstice Vigil",
+			"name": "Yoke of Suffering",
 			"type": "Onyx Amulet",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_2154246560",
+						"id": "pseudo.pseudo_total_elemental_resistance",
 						"value": {
-							"min": 25
-						}
-					},
-					{
-						"id": "explicit.stat_3299347043",
-						"value": {
-							"min": 70
+							"min": 77
 						}
 					}
 				]

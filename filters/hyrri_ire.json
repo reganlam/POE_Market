@@ -1,28 +1,28 @@
 {
-	"name": "Solstice Vigil",
-	"price": 2,
+	"name": "Hyrri's Ire",
+	"price": 3,
 	"currency": "exa",
-	"link": "https://www.pathofexile.com/trade/search/Standard",
+	"link": "https://www.pathofexile.com/trade/search/Standard/3qG2rJkf5",
 	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Solstice Vigil",
-			"type": "Onyx Amulet",
+			"name": "Hyrri's Ire",
+			"type": "Zodiac Leather",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_2154246560",
+						"id": "explicit.stat_124859000",
 						"value": {
-							"min": 25
+							"min": 200
 						}
 					},
 					{
-						"id": "explicit.stat_3299347043",
-						"value": {
-							"min": 70
+						"id": "explicit.stat_4067062424",
+						"value":{
+							"min": 220
 						}
 					}
 				]

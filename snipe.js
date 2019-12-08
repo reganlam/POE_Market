@@ -96,6 +96,7 @@ const check_listings = async(item) => {
 					whisper: listing_data.whisper,
 					price: listing_data.price,
 					currency: listing_data.currency,
+					link: item.link,
 					created_at: Date.now()
 				},
 				{new: true, upsert: true}

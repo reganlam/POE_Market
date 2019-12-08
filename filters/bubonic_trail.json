@@ -2,6 +2,7 @@
 	"name": "Bubonic Trail",
 	"price": 100,
 	"currency": "chaos",
+	"link": "https://www.pathofexile.com/trade/search/Standard/RWwG8rt7",
 	"filter": {
 		"query":{
 			"status":{

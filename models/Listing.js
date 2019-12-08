@@ -26,6 +26,10 @@ const ListingSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	link:{
+		type: String,
+		required: true
+	},
 	hasSeen:{
 		type: Boolean,
 		default: false

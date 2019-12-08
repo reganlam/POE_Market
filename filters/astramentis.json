@@ -1,7 +1,8 @@
 {
 	"name": "Astramentis",
-	"price": 1,
+	"price": 2,
 	"currency": "exa",
+	"link": "https://www.pathofexile.com/trade/search/Standard/nro7J5zC0",
 	"filter": {
 		"query":{
 			"status":{

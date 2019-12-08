@@ -2,6 +2,7 @@
 	"name": "Tombfist",
 	"price": 50,
 	"currency": "chaos",
+	"link": "https://www.pathofexile.com/trade/search/Standard/PRmYKMIL",
 	"filter": {
 		"query":{
 			"status":{

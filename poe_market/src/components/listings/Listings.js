@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 // from file
 import {getListings, makeListingSeen} from '../../actions/listing'
 import Timer from './Timer'
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Listings = ({getListings, makeListingSeen, listing: {listings, loading}}) => {
 	useEffect(() => {
@@ -28,13 +27,11 @@ const Listings = ({getListings, makeListingSeen, listing: {listings, loading}}) 
 									window.confirm('Are you sure you wish to hide this listing?') && makeListingSeen(listing._id)
 								}} className="btn btn-dark">{listing.name}</button>
 							</h6>
-							<h6 className = 'col-2'>
+							<h6 className = 'col-1'>
 								<div className="btn btn-dark">{listing.price}{' '}{listing.currency}</div>
 							</h6>
-							<h6 className = 'col-8'>
-								<CopyToClipboard text={listing.whisper}>
-        							<button className="btn btn-dark">{listing.whisper}</button>
-      							</CopyToClipboard>
+							<h6 className = 'col-8'> 
+       						<a target="_blank" href={listing.link} ><button className="btn btn-dark">{listing.whisper}</button></a>
 							</h6>
 						</div>		
 					</Fragment>

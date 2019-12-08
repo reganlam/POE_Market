@@ -2,6 +2,7 @@
 	"name": "Dying Sun",
 	"price": 100,
 	"currency": "chaos",
+	"link": "https://www.pathofexile.com/trade/search/Standard",
 	"filter": {
 		"query":{
 			"status":{

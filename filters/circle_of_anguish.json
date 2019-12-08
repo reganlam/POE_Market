@@ -1,29 +1,23 @@
 {
-	"name": "Solstice Vigil",
-	"price": 2,
+	"name": "Circle of Anguish",
+	"price": 4,
 	"currency": "exa",
-	"link": "https://www.pathofexile.com/trade/search/Standard",
+	"link": "https://www.pathofexile.com/trade/search/Standard/zb2VB5mU4",
 	"filter": {
 		"query":{
 			"status":{
 				"option": "online"
 			},
-			"name": "Solstice Vigil",
-			"type": "Onyx Amulet",
+			"name": "Circle of Anguish",
+			"type": "Ruby Ring",
 			"stats":[{
 				"type": "and",
 				"filters":[
 					{
-						"id": "explicit.stat_2154246560",
-						"value": {
-							"min": 25
-						}
+						"id": "explicit.stat_2775776604"
 					},
 					{
-						"id": "explicit.stat_3299347043",
-						"value": {
-							"min": 70
-						}
+						"id": "explicit.stat_2154349925"
 					}
 				]
 			}],

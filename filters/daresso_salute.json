@@ -2,6 +2,7 @@
 	"name": "Daresso's Salute",
 	"price": 30,
 	"currency": "chaos",
+	"link": "https://www.pathofexile.com/trade/search/Standard/jWBEZWbTX",
 	"filter": {
 		"query":{
 			"status":{

@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bottleneck": "^2.19.5",
-    "config": "^3.2.4",
+    "config": "^3.3.8",
     "express": "^4.17.1",
     "glob": "^7.1.6",
     "mongodb": "^3.3.5",
